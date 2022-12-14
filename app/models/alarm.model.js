@@ -33,13 +33,13 @@ Alarm.getAll = (start, end, date, name, no, result) => {
     notUsedWhere = false
   } else {
     if (start) {
-      query += ` WHERE DATE(ATime) >= DATE('${date}')`
+      query += ` WHERE DATE(ATime) >= DATE('${start}')`
       notUsedWhere = false
       if (end) {
-        query += ` AND DATE(ATime) <= DATE('${date}')`
+        query += ` AND DATE(ATime) <= DATE('${end}')`
       }
     } else if (end) {
-      query += ` WHERE DATE(ATime) <= DATE('${date}')`
+      query += ` WHERE DATE(ATime) <= DATE('${end}')`
       notUsedWhere = false
     }
   }

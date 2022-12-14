@@ -33,13 +33,13 @@ Workhistory.getAll = (start, end, date, name, no, result) => {
     notUsedWhere = false
   } else {
     if (start) {
-      query += ` WHERE DATE(WorkDate) >= DATE('${date}')`
+      query += ` WHERE DATE(WorkDate) >= DATE('${start}')`
       notUsedWhere = false
       if (end) {
-        query += ` AND DATE(WorkDate) <= DATE('${date}')`
+        query += ` AND DATE(WorkDate) <= DATE('${end}')`
       }
     } else if (end) {
-      query += ` WHERE DATE(WorkDate) <= DATE('${date}')`
+      query += ` WHERE DATE(WorkDate) <= DATE('${end}')`
       notUsedWhere = false
     }
   }
