@@ -1,25 +1,21 @@
 const express = require('express')
+const subdomain = require('express-subdomain')
 const cors = require('cors')
 
+const PORT = process.env.PORT || 8080
 const app = express()
 
-var corsOptions = {
-  origin: 'http://localhost:8081'
-}
-
-app.use(cors(corsOptions))
-
+app.use(cors())
 app.use(express.json())
-
+app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/', (req, res) => {
-  res.json({ message: 'Welcome.' })
-})
+const api = require('./app/routes/api.js')
+const admin = require('./app/routes/admin.js')
 
-require('./app/routes/routes.js')(app)
+app.use(subdomain('api', api))
+app.use(subdomain('admin', admin))
 
-const PORT = process.env.PORT || 8080
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}.`)
 })

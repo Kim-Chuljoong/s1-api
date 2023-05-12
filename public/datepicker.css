@@ -1,0 +1,160 @@
+.container {
+  top: 43px !important;
+  color: #adbac7;
+  border-radius: 6px;
+  border: 1px solid #454c56;
+  font-family: 'SUIT', sans-serif;
+}
+.container input, .container button {
+  font-family: 'SUIT', sans-serif;
+}
+.container>main, .container>footer, .container>header {
+  background-color: #22272f;
+}
+.calendar>.header .month-name {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  font-weight: 700;
+}
+.calendar>.header .month-name>span::before {
+  content: '년 ';
+}
+.calendar>.daynames-row>.dayname {
+  color: rgb(117 131 144);
+}
+.container.lock-plugin .calendar>.days-grid>.day.not-available {
+  background-color: transparent;
+  color: #373e47;
+  font-style: normal;
+}
+.calendar>.days-grid>.day {
+  border-radius: 6px;
+}
+.container.lock-plugin .calendar>.days-grid>:not(.not-available)+.day.not-available {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+.container.lock-plugin .calendar>.days-grid>.day.not-available+.day.not-available {
+  border-radius: 0;
+}
+.container.lock-plugin .calendar>.days-grid>.day.not-available+.day.not-available:last-of-type {
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
+}
+.calendar>.days-grid>.day:hover {
+  border-color: #539bf5;
+  color: #539bf5;
+}
+.container.range-plugin .calendar>.days-grid>.day.start:after, .container.range-plugin .calendar>.days-grid>.day.end:after {
+  border: none;
+}
+.container.range-plugin .calendar>.days-grid>.day.end, .container.range-plugin .calendar>.days-grid>.day.start {
+  background-color: #539bf5;
+  color: #fff;
+  font-weight: 700;
+}
+.container.range-plugin .calendar>.days-grid>.day.in-range {
+  background-color: #539bf5;
+  color: rgba(255, 255, 255, 0.68);
+  border: none;
+}
+.calendar>.days-grid>.day.today {
+  color: inherit;
+}
+.calendar>.days-grid>.day.today::after {
+  content: '';
+  position: absolute;
+  bottom: 4px;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  margin-left: -2px;
+  border-radius: 2px;
+  background-color: #539bf5;
+}
+.calendar>.days-grid>.day.today:hover {
+  color: #539bf5;
+}
+.calendar>.days-grid>.day.today:hover::after {
+  content: none;
+}
+.container.lock-plugin .calendars .calendar:first-child>.header.no-previous-month .previous-button, .container.lock-plugin .calendars .calendar:last-child>.header.no-next-month .next-button {
+  visibility: visible;
+  opacity: 0.4;
+  pointer-events: none;
+}
+.container.lock-plugin .calendars .calendar:first-child>.header.no-previous-month .previous-button:hover, .container.lock-plugin .calendars .calendar:last-child>.header.no-next-month .next-button:hover {
+  color: #adbac7;
+  background-color: transparent;
+}
+.calendar>.header button {
+  width: 30px;
+  height: 28px;
+  appearance: none;
+  font-size: 0;
+  border: none;
+  color: #adbac7;
+  background-color: transparent;
+}
+.calendar>.header button:hover {
+  border-radius: 6px;
+  color: #539bf5;
+  background-color: #444c56;
+}
+.calendar>.header button.previous-button>svg {
+  transform: rotate(90deg);
+}
+.calendar>.header button.next-button>svg {
+  transform: rotate(-90deg);
+}
+.calendar>.header button>img, .calendar>.header button>svg {
+  fill: currentColor;
+  color: currentColor;
+  transform: scale(1);
+}
+.calendar>.header button:hover>img, .calendar>.header button:hover>svg {
+  fill: currentColor;
+  color: currentColor;
+}
+.container>footer .footer-buttons>button {
+  height: 28px;
+  padding: 3px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 20px;
+  border-radius: 6px;
+}
+.container>footer .footer-buttons>button.cancel-button, .container>footer .footer-buttons>button.apply-button, .container>footer .footer-buttons>button.apply-button:disabled {
+  border-color: rgb(205, 217, 229, 0.1);
+  color: #adbac7;
+  background-color: transparent;
+}
+.container>footer .footer-buttons>button.apply-button:disabled {
+  color: rgba(173, 186, 199, 0.4);
+}
+.container>footer .footer-buttons>button.cancel-button:hover, .container>footer .footer-buttons>button.apply-button:not(:disabled):hover {
+  border-color: rgb(205, 217, 229, 0.1);
+  color: #adbac7;
+  background-color: #373e47;
+}
+.container>footer .footer-buttons>button.apply-button:not(:disabled):hover {
+  color: #539bf5;
+}
+
+@media (max-width: 480px) {
+  .container:not(.inline).show {
+    bottom: 20px !important;
+    left: 16px !important;
+    right: 16px !important;
+    width: auto !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .container>footer .footer-buttons>button {
+    height: 36px;
+    padding-right: 16px;
+    padding-left: 16px;
+    font-size: 14px;
+  }
+}
