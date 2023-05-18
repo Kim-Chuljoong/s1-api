@@ -42,8 +42,10 @@ Spreadsheet.get = async (spreadsheetId, range, type, find, result) => {
   if (type === 'member') {
     result(null, values.filter((item) => item['이메일'] === find)[0] || {})
   } else if(type === 'group') {
+    result(null, values.filter((item) => item['그룹'] === find) || [])
+  } else if(type === 'team') {
     result(null, values.filter((item) => item['팀'] === find) || [])
-  } else if(type === 'schedule') {
+  } else if(type === 'schedule' || type === 'specialSchedule') {
     result(null, values)
   } else {
     result(null, 'Invalid request.')

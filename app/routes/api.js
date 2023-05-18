@@ -12,6 +12,8 @@ api.get('/workhistory/current', workhistories.find)
 
 api.get('/sheets/member', spreadsheets.findMember)
 api.get('/sheets/group', spreadsheets.findGroup)
+api.get('/sheets/team', spreadsheets.findTeam)
 api.get('/sheets/schedule', spreadsheets.findSchedule)
+api.get('/sheets/specialSchedule', spreadsheets.findSpecialSchedule)
 
 module.exports = api

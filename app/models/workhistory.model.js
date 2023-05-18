@@ -85,7 +85,8 @@ Workhistory.get = (name, no, group, status, orderBy, result) => {
     query += ` AND Name = '${name}'`
   }
   if (no) {
-    query += ` AND Sabun = '${no}'`
+    const noArray = no.split(/\s?,\s?/)
+    query += ` AND Sabun IN (${noArray.map((no) => `'${no}'`).join(', ')})`
   }
 
   if (group) {
@@ -177,7 +178,8 @@ Workhistory.getAll = (start, end, date, name, no, group, status, orderBy, result
     notUsedWhere = false
   }
   if (no) {
-    query += ` ${notUsedWhere ? 'WHERE' : 'AND'} Sabun = '${no}'`
+    const noArray = no.split(/\s?,\s?/)
+    query += ` ${notUsedWhere ? 'WHERE' : 'AND'} Sabun IN (${noArray.map((no) => `'${no}'`).join(', ')})`
     notUsedWhere = false
   }
 
