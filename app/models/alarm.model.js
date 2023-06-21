@@ -14,14 +14,12 @@ const processData = function(data) {
   })
 }
 
-Alarm.get = (name, no, orderBy, result) => {
+Alarm.get = (name, orderBy, result) => {
   let query = 'SELECT * FROM T_SECOM_ALARM WHERE DATE(ATime) = CURDATE()'
 
   if (name) {
-    query += ` AND Name = '${name}'`
-  }
-  if (no) {
-    query += ` AND Sabun = '${no}'`
+    const nameArray = name.split(/\s?,\s?/)
+    query += ` AND Name IN (${nameArray.map((name) => `'${name}'`).join(', ')})`
   }
 
   if (['asc', 'desc'].includes(orderBy)) {
@@ -51,7 +49,7 @@ Alarm.get = (name, no, orderBy, result) => {
   })
 }
 
-Alarm.getAll = (start, end, date, name, no, orderBy, result) => {
+Alarm.getAll = (start, end, date, name, orderBy, result) => {
   let query = 'SELECT * FROM T_SECOM_ALARM'
   let notUsedWhere = true
 
@@ -72,11 +70,8 @@ Alarm.getAll = (start, end, date, name, no, orderBy, result) => {
   }
 
   if (name) {
-    query += ` ${notUsedWhere ? 'WHERE' : 'AND'} Name = '${name}'`
-    notUsedWhere = false
-  }
-  if (no) {
-    query += ` ${notUsedWhere ? 'WHERE' : 'AND'} Sabun = '${no}'`
+    const nameArray = name.split(/\s?,\s?/)
+    query += ` ${notUsedWhere ? 'WHERE' : 'AND'} Name IN (${nameArray.map((name) => `'${name}'`).join(', ')})`
     notUsedWhere = false
   }
 

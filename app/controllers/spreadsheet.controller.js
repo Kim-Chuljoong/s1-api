@@ -15,6 +15,19 @@ exports.findMember = (req, res) => {
   })
 }
 
+exports.findAllMember = (req, res) => {
+  const range = '구성원'
+
+  Spreadsheet.get(spreadsheetId, range, 'allMember', null, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || 'Some error occurred while retrieving spreadsheets.'
+      })
+    else res.send(data)
+  })
+}
+
 exports.findGroup = (req, res) => {
   const range = '구성원'
   const find = req.query.find
@@ -62,6 +75,19 @@ exports.findSpecialSchedule = (req, res) => {
   const find = req.query.find
 
   Spreadsheet.get(spreadsheetId, range, 'specialSchedule', find, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || 'Some error occurred while retrieving spreadsheets.'
+      })
+    else res.send(data)
+  })
+}
+
+exports.findNotification = (req, res) => {
+  const range = '알림'
+
+  Spreadsheet.get(spreadsheetId, range, 'notification', null, (err, data) => {
     if (err)
       res.status(500).send({
         message:

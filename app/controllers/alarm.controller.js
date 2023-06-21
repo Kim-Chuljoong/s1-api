@@ -2,10 +2,9 @@ const Alarm = require('../models/alarm.model.js')
 
 exports.find = (req, res) => {
   const name = req.query.name
-  const no = req.query.no
   const orderBy = req.query.orderBy
 
-  Alarm.get(name, no, orderBy, (err, data) => {
+  Alarm.get(name, orderBy, (err, data) => {
     if (err)
       res.status(500).send({
         message:
@@ -20,10 +19,9 @@ exports.findAll = (req, res) => {
   const end = req.query.end
   const date = req.query.date
   const name = req.query.name
-  const no = req.query.no
   const orderBy = req.query.orderBy
 
-  Alarm.getAll(start, end, date, name, no, orderBy, (err, data) => {
+  Alarm.getAll(start, end, date, name, orderBy, (err, data) => {
     if (err)
       res.status(500).send({
         message:

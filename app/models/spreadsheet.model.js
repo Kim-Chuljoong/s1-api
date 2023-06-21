@@ -19,9 +19,6 @@ Spreadsheet.get = async (spreadsheetId, range, type, find, result) => {
   } else if (type === 'member' && (!find || !find.endsWith('@dfy.co.kr'))) {
     result(null, 'Invalid request.')
     return
-  } else if(type === 'group' && (!find || !/^\d{3}$/.test(find))) {
-    result(null, 'Invalid request.')
-    return
   }
 
   const context = await googleSheet.spreadsheets.values.get({
@@ -41,11 +38,13 @@ Spreadsheet.get = async (spreadsheetId, range, type, find, result) => {
 
   if (type === 'member') {
     result(null, values.filter((item) => item['이메일'] === find)[0] || {})
+  } else if (type === 'allMember') {
+    result(null, values)
   } else if(type === 'group') {
-    result(null, values.filter((item) => item['그룹'] === find) || [])
+    result(null, values.filter((item) => find.split(/\s?\,\s?/).includes(item['소속 그룹'])) || [])
   } else if(type === 'team') {
-    result(null, values.filter((item) => item['팀'] === find) || [])
-  } else if(type === 'schedule' || type === 'specialSchedule') {
+    result(null, values.filter((item) => find.split(/\s?\,\s?/).includes(item['소속 팀'])) || [])
+  } else if(type === 'schedule' || type === 'specialSchedule' || type === 'notification') {
     result(null, values)
   } else {
     result(null, 'Invalid request.')
