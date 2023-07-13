@@ -18,5 +18,6 @@ api.get('/sheets/team', cacheMiddleware(3600), spreadsheets.findTeam)
 api.get('/sheets/schedule', cacheMiddleware(3600), spreadsheets.findSchedule)
 api.get('/sheets/specialSchedule', cacheMiddleware(3600), spreadsheets.findSpecialSchedule)
 api.get('/sheets/notification', cacheMiddleware(10), spreadsheets.findNotification)
+api.get('/sheets/leave', cacheMiddleware(3600), spreadsheets.findLeave)
 
 module.exports = api

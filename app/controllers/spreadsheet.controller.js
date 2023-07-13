@@ -96,3 +96,17 @@ exports.findNotification = (req, res) => {
     else res.send(data)
   })
 }
+
+exports.findLeave = (req, res) => {
+  const range = `${new Date().getFullYear()}년 통계`
+  const find = req.query.find
+
+  Spreadsheet.get('19NTWiBbEZIuX0-6ooyZ3WySuC-PfH95QlWs7fZzaiBk', range, 'leave', find, (err, data) => {
+    if (err)
+      res.status(500).send({
+        message:
+          err.message || 'Some error occurred while retrieving spreadsheets.'
+      })
+    else res.send(data)
+  })
+}

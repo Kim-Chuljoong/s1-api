@@ -26,14 +26,15 @@ Spreadsheet.get = async (spreadsheetId, range, type, find, result) => {
     range
   })
 
-  const keys = context.data.values[0];
-  const values = [];
-  for (let i = 1; i < context.data.values.length; i++) {
-    const obj = {};
+  const _add = range.includes('통계') ? 2 : ['휴가기록', '공가내역'].includes(range) ? 1 : 0
+  const keys = context.data.values[0 + _add]
+  const values = []
+  for (let i = 1 + _add; i < context.data.values.length; i++) {
+    const obj = {}
     for (let j = 0; j < keys.length; j++) {
-      obj[keys[j]] = context.data.values[i][j];
+      obj[keys[j]] = context.data.values[i][j]
     }
-    values.push(obj);
+    values.push(obj)
   }
 
   if (type === 'member') {
@@ -46,6 +47,8 @@ Spreadsheet.get = async (spreadsheetId, range, type, find, result) => {
     result(null, values.filter((item) => find.split(/\s?\,\s?/).includes(item['소속 팀'])) || [])
   } else if(type === 'schedule' || type === 'specialSchedule' || type === 'notification') {
     result(null, values)
+  } else if(type === 'leave') {
+    result(null, values.filter((item) => item['사원명'] === find)[0] || {})
   } else {
     result(null, 'Invalid request.')
   }
